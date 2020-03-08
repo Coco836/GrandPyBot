@@ -15,13 +15,20 @@ Use of heroku.
 >**NOTE:** Set your own google key API. 
 
 ### Built with
-- Python -> back-end language
-- Flask -> py web framework
-- Pytest -> testing framework
-- HTML -> web pages skeleton
-- CSS -> web pages design
-- JavaScript -> front-end language
-- JQuery -> JavaScript framework
+- Python
+    - back-end language
+- Flask 
+    - py web framework
+- Pytest 
+    - testing framework
+- HTML 
+    - web pages skeleton
+- CSS 
+    - web pages design
+- JavaScript 
+    - front-end language
+- JQuery 
+    - JavaScript framework
 
 - Google Maps API
 - Wiki Media API 
