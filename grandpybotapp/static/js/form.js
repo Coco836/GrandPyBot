@@ -15,7 +15,7 @@ $(document).ready(function(){
 
             else if (data.address_story) {
                 $('#scroll-dialogue').append(`
-                    <div>
+                <div>
                         <p class="margin-ask-user"><span class="user-question"> ${data.user_input} </span></p>
                         <p class="margin-response"><span class="response"> ${data.message} </span></p>
                         <div class="map"></div>
@@ -37,8 +37,16 @@ $(document).ready(function(){
                 $('#ask-area').val('');
 
             }
+            let scroll=$('#scroll-dialogue');
+            scroll.animate({scrollTop: scroll.prop("scrollHeight")});
         });
         event.preventDefault();
+    });
+    $( document ).ajaxStart(function() {
+        $( ".loader" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( ".loader" ).hide();
     });
 });
 

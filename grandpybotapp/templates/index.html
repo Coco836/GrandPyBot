@@ -17,9 +17,15 @@
 
     <section class="row">
         <div id="dialogue" class=".col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
-            <div id="scroll-dialogue" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+            <div id="scroll-dialogue">
               <p id="margin-ask-question"><span id="ask-question">Salut mon grand, Bienvenue chez papy bot ! Où souhaites-tu te rendre ?</span></p>
             </div>
+            <div class="loader" style="display:none">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>            
+
             <form class="question" action="http://127.0.0.1:5000/" method="post">
                 <div class="input-group">
                     <input type="text" name="user_input" class="form-control" id="ask-area" placeholder="Entre ta question...">
