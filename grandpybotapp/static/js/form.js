@@ -1,37 +1,55 @@
-// $(document).ready(function(){
-//     $('form').on('submit', function(event) {
-//         $.ajax({
-//             data : {
-//                 user_input : $('#ask-area').val()
-//             },
-//             type : 'POST', 
-//             url : '/'
-//         })
-//         .done(function(data) {
-//             $('#user-question').text(data.user_input).show();
-//         });
-//         event.preventDefault();
-//     });
-// })
 $(document).ready(function(){
+    $('form').on('submit', function(event) {
+        $.ajax({
+            data : {
+                user_input : $('#ask-area').val()
+            },
+            type : 'POST', 
+            url : '/'
+        })
+        
+        .done(function(data) {
+            if (!data.user_input) {
+                return
+            }
 
-    $('form').on('submit', function(e){
-        e.preventDefault();
-        const user_input = $('#ask-area').val()
-        // return if the user does not enter any text
-        if (!user_input) {
-        return
-        }
+            else if (data.address_story) {
+                $('#scroll-dialogue').append(`
+                    <div>
+                        <p class="margin-ask-user"><span class="user-question"> ${data.user_input} </span></p>
+                        <p class="margin-response"><span class="response"> ${data.message} </span></p>
+                        <div class="map"></div>
+                        <p class="margin-story"><span class="story"> ${data.address_story} <a href="${data.wiki_page_url}" target="blank" class="url-wiki"> ${data.wiki_page_url} </a></span></p>
+                        <p class="margin-end-quote"><span class="end-quote"> ${data.end_quote} </span></p>
+                    </div>
+                `);
+                initMap(data);
+                $('#ask-area').val('');
+            }
 
-        $('#scroll-dialogue').append(`
-            <p id="margin-ask-user"><span id="user-question"></span>
-                ${user_input}
-            </p>
-        `);
+            else {
+                $('#scroll-dialogue').append(`
+                    <div>               
+                        <p class="margin-ask-user"><span class="user-question"> ${data.user_input} </span></p>
+                        <p class="margin-response"><span class="response"> ${data.message} </span></p>
+                    </div>
+                `);
+                $('#ask-area').val('');
 
-        // clear the text input 
-        $('#ask-area').val('')
+            }
+        });
+        event.preventDefault();
+    });
+});
 
-        // send the message
-        submit_message(user_input)
-    })});
+function initMap(data) {
+    let location = {lat: data['latitude'], lng: data['longitude']};
+    let map = new google.maps.Map($("#scroll-dialogue").find(".map").last().get(0), {
+        zoom: 10, 
+        center: location
+    });
+    let marker = new google.maps.Marker({
+        position: location, 
+        map: map
+    });
+}

@@ -56,7 +56,8 @@ class GoogleMapsApi():
     def get_address_geolocation(self):
         request_data = geocoder.google(
                                         self.request,
-                                        key=config.API_KEY_GOOGLE_MAPS
+                                        key=config.API_KEY_GOOGLE_MAPS,
+                                        method="places"
         )
         address_details = request_data.json
         try:
@@ -68,7 +69,6 @@ class GoogleMapsApi():
         except TypeError:
             raise UnknownLocation
 
-        # print(self.latitude, self.longitude, self.address)
         return self.latitude, self.longitude, self.address
 
 class UnknownLocation(Exception):
@@ -82,7 +82,7 @@ class MediaWikiApi():
         self.coordinates = maps.get_address_geolocation()
 
 
-    def request_wiki_page_id(self):
+    def request_wiki_page(self):
         search_params = {
                         'action': 'query',
                         'list': 'geosearch',
@@ -94,7 +94,8 @@ class MediaWikiApi():
         request_wiki_data = get('https://fr.wikipedia.org/w/api.php', params=search_params)
         page_data = request_wiki_data.json()
         page_id = page_data["query"]["geosearch"][0]["pageid"]
-        return page_id
+        title = page_data["query"]["geosearch"][0]["title"]
+        return page_id, title
 
     @staticmethod
     def request_wiki_summary(page_id=None):
@@ -106,7 +107,7 @@ class MediaWikiApi():
                         'pageids': page_id,
                         'exlimit' : 1,
                         'explaintext' : True,
-                        'exsentences': 3,
+                        'exsentences': 2,
                         'format': 'json'
         }
         request_story_wiki = get('https://fr.wikipedia.org/w/api.php', params=search_params)
@@ -116,5 +117,5 @@ class MediaWikiApi():
 
 maps = GoogleMapsApi('tour eiffel')
 story = MediaWikiApi(maps)
-page_id = story.request_wiki_page_id()
-story.request_wiki_summary(page_id)
+page = story.request_wiki_page()
+story.request_wiki_summary(page[0])

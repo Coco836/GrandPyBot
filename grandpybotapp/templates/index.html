@@ -5,44 +5,49 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid">
     <header class="row">
-        <div id ="papy" class=".col-center-12 col-sm-2 col-md-2 col-lg-1 col-xl-1">
-            <img src="static/image/grandpy.png" alt="Papy">
+        <div id ="papy-img" class=".col-center-12 col-sm-2 col-md-2 col-lg-1 col-xl-1">
+            <img id ="papy" src="static/image/grandpy.png" alt="Papy">
         </div>
         <div class=".col-12 col-sm-10 col-md-10 col-lg-11 col-xl-11">
-            <h1>Salut mon grand, bienvenue chez Papy Bot</h1>
+            <h1>GrandPy Bot, ton papy robot</h1>
         </div>
     </header>
 
     <section class="row">
-        <div id="dialogue" class=".col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7">
+        <div id="dialogue" class=".col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
             <div id="scroll-dialogue" data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-              <p id="margin-ask-question"><span id="ask-question">Pose-moi une question !</span></p>
-              <!-- <p id="margin-ask-user"><span id="user-question"></span></p> -->
+              <p id="margin-ask-question"><span id="ask-question">Salut mon grand, Bienvenue chez papy bot ! Où souhaites-tu te rendre ?</span></p>
             </div>
             <form class="question" action="http://127.0.0.1:5000/" method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="ask-area" placeholder="Entre ta question...">
+                    <input type="text" name="user_input" class="form-control" id="ask-area" placeholder="Entre ta question...">
                     <span class="input-group-btn">
-                        <button class="btn btn-info" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
+                        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
                     </span>
                 </div>
             </form>
         </div>
-
-        <div id="map" class=".col-12 col-sm-12 ml-sm-auto col-md-12 ml-md-auto col-lg-4 offset-lg-1 col-xl-4 offset-xl-1">
-        </div>
-
-
+        
     </section>
-
+    
     <footer>
-        <div id ="info" class=".col-center-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
-            <h6><br>Colette Anselme</h6>
-            <p>lien git</p>
-
-
+        <div id ="info" class=".col-center-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <br><br><br>
+            <div id="links">
+                <p>
+                    <a href="https://github.com/Coco836/GrandPyBot" target="_blank">
+                        <img id="gh_icon" src="static/image/github.png" alt="github">
+                    </a>
+                    <a href="https://trello.com/b/B9SsQVAL/grandpy-bot" target="_blank">
+                        <img id="tableau_icon" src="static/image/trello.png" alt="trello">
+                    </a>
+                </p>
+            </div>
+            <h6>Colette Anselme</h6>
+            <p>2019 - 2020</p>
+            <br>
         </div>
     </footer>
 </div>

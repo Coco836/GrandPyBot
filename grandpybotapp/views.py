@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from flask import Flask, render_template, url_for, request, jsonify
-from program import Parser, GrandPyBotConversation, GoogleMapsApi, MediaWikiApi, UnknownLocation
+from classes import Parser, GrandPyBotConversation, GoogleMapsApi, MediaWikiApi, UnknownLocation
 
 app = Flask(__name__)
 
@@ -9,8 +9,7 @@ app = Flask(__name__)
 def index():
         return render_template('index.html')
 
-
-@app.route('/',methods = ['POST'])
+@app.route('/', methods = ['POST'])
 def location_request():
     user_input = request.form['user_input']
     parsed_user_input = Parser.arrange_input(user_input)
@@ -23,13 +22,18 @@ def location_request():
     else:
         address_introduction = GrandPyBotConversation.random_response()
         message = address_introduction + maps.address
+        lat = maps.latitude
+        lng = maps.longitude
+
         if message:
-            page_id = story.request_wiki_page_id()
-            address_story = story.request_wiki_summary(page_id)
-            return jsonify({'user_input' : user_input})
-            # return render_template("index.html", user_input=user_input, message=message, address_story=address_story)
-    return jsonify({'user_input' : user_input})
-    # return render_template("index.html", user_input=user_input, message=message)
+            page = story.request_wiki_page()
+            page_title = page[1].replace(" ", "_")
+            wiki_page_url = f'''https://fr.wikipedia.org/wiki/{page_title}'''
+            address_story = GrandPyBotConversation.random_story() + story.request_wiki_summary(page[0]) + ".. "
+            end_quote = GrandPyBotConversation.random_end_quote()
+            return jsonify({'user_input' : user_input, 'message' : message, 'address_story' : address_story, 'wiki_page_url' : wiki_page_url, 'end_quote' : end_quote, 'latitude' : lat, 'longitude': lng})
+    
+    return jsonify({'user_input' : user_input, 'message' : message})
 
 if __name__ == "__main__":
     app.run(debug=True)
