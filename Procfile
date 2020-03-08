@@ -1,0 +1,1 @@
+web: gunicorn grandpy-papy-bot:app
