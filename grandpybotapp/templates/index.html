@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>GrandPyBot</title>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <header class="row">
+        <div id ="papy-img" class=".col-center-12 col-sm-2 col-md-2 col-lg-1 col-xl-1">
+            <img id ="papy" src="static/image/grandpy.png" alt="Papy">
+        </div>
+        <div class=".col-12 col-sm-10 col-md-10 col-lg-11 col-xl-11">
+            <h1>GrandPy Bot, ton papy robot</h1>
+        </div>
+    </header>
+
+    <section class="row">
+        <div id="dialogue" class=".col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+            <div id="scroll-dialogue">
+              <p id="margin-ask-question"><span id="ask-question">Salut mon grand, Bienvenue chez papy bot ! Où souhaites-tu te rendre ?</span></p>
+            </div>
+            <div class="loader" style="display:none">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>            
+
+            <form class="question" action="http://127.0.0.1:5000/" method="post">
+                <div class="input-group">
+                    <input type="text" name="user_input" class="form-control" id="ask-area" placeholder="Entre ta question...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        
+    </section>
+    
+    <footer>
+        <div id ="info" class=".col-center-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <br><br><br>
+            <div id="links">
+                <p>
+                    <a href="https://github.com/Coco836/GrandPyBot" target="_blank">
+                        <img id="gh_icon" src="static/image/github.png" alt="github">
+                    </a>
+                    <a href="https://trello.com/b/B9SsQVAL/grandpy-bot" target="_blank">
+                        <img id="tableau_icon" src="static/image/trello.png" alt="trello">
+                    </a>
+                </p>
+            </div>
+            <h6>Colette Anselme</h6>
+            <p>2019 - 2020</p>
+            <br>
+        </div>
+    </footer>
+</div>
+{% endblock %}
