@@ -1,1 +1,1 @@
-web: gunicorn grandpy-papy-bot:app
+web: gunicorn views:app
