@@ -1,4 +1,3 @@
-import stopwords
 import sys
 sys.path.append("..")
 import GrandPyBot.config as config
