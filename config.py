@@ -1,4 +1,6 @@
 import os
+
+
 API_KEY_GOOGLE_MAPS = os.environ.get('API_KEY_GOOGLE_MAPS')
 
 FRENCH_STOP_WORDS = ["a","abord","absolument","adresse","afin","ah","ai",
