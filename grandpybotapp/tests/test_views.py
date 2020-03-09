@@ -3,23 +3,17 @@ import pytest
 import urllib.request
 from unittest.mock import Mock
 
-# @pytest.fixture
-# def client():
-#     db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
-#     flaskr.app.config['TESTING'] = True
+def test_base_route(monkeypatch):
+    client = views.app.test_client()
+    url = '/'
+    response = client.get(url)
+    # def mockreturn(request, params):
+    #     index = "Hello it's papy bot !"
+    #     mock = Mock()
+    #     mock.return_value = index
+    #     return mock
+    # monkeypatch.setattr(urllib.request, 'urlopen', mockreturn)
+    # assert response.get_data() == b"Hello it's papy bot !"
+    assert response.status_code == 200
 
-#     with flaskr.app.test_client() as client:
-#         with flaskr.app.app_context():
-#             flaskr.init_db()
-#         yield client
-
-#     os.close(db_fd)
-#     os.unlink(flaskr.app.config['DATABASE'])
-
-# with app.test_client() as c:
-#     data = c.post('/', json={
-#         'user_input': 'rzlmmkrlmkzlm', 
-#         'message': 'Je ne sais pas de quoi tu parles petit ! Pose moi une vraie question.'
-#     })
-#     json_data = data.get_json()
-#     assert verify_data(user_input, message)
+## Comment faire le test pour fonction location_request ???

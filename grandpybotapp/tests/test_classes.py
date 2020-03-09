@@ -83,17 +83,19 @@ class TestGoogleMapsApi():
                 address_details['formatted_address']
         )
 
-    # def test_try_block(self, monkeypatch):
-    # """Test for unknown location in get_address_geolocation method."""
-    #     def mockreturn(request, params):
-    #         json = {"results" : [], "status" : "ZERO_RESULTS"}
-    #         mock = Mock(side_effect=classes.UnknownLocation, return_value = 0)
-    #         mock.json.return_value = json
-    #         return mock
-    #     monkeypatch.setattr(classes, 'get', mockreturn)
-    #     with pytest.raises(classes.UnknownLocation):
-    #         classes.GoogleMapsApi.get_address_geolocation()
+    def test_try_block(self, monkeypatch):
+        """Test for unknown location in get_address_geolocation method."""
+        coordinates = classes.GoogleMapsApi('fjklzejflkez')
+        # def mockreturn(request, params):
+        #     json = {"results" : [], "status" : "ZERO_RESULTS"}
+        #     mock = Mock()
+        #     mock.json.return_value = json
+        #     return mock
+        # monkeypatch.setattr(classes, 'get', mockreturn)
+        with pytest.raises(classes.UnknownLocation):
+            coordinates.get_address_geolocation()
 
+            
     class TestMediaWikiApi():
         """Test for MediaWikiApi class."""
 
