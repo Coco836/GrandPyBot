@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from flask import Flask, render_template, url_for, request, jsonify
-from classes import (Parser, GrandPyBotConversation, GoogleMapsApi, MediaWikiApi, UnknownLocation)
+from .classes import Parser, GrandPyBotConversation, GoogleMapsApi, MediaWikiApi, UnknownLocation
 
 app = Flask(__name__)
 
