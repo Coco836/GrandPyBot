@@ -61,66 +61,53 @@ class TestGoogleMapsApi():
 
     def test_geocode(self, monkeypatch):
         """Test for get_address_geolocation method."""
-        coordinates = classes.GoogleMapsApi('tour eiffel')
-        address_details = {
-                 "formatted_address": "Champ de Mars, 5 Avenue Anatole France"
-                 ", 75007 Paris, France",
-                 "geometry": {
-                    "location": {
-                       "lat": 48.85837009999999,
-                       "lng": 2.2944813
-                    },
-                 },
-                 "place_id": "ChIJLU7jZClu5kcR4PcOOO6p3I0",
-        }
-
-        def mockreturn(request):
-            return address_details
-        monkeypatch.setattr(urllib.request, 'urlopen', mockreturn)
-        assert coordinates.get_address_geolocation() == (
-                address_details['geometry']['location']['lat'],
-                address_details['geometry']['location']['lng'],
-                address_details['formatted_address']
+        def mockreturn(request, key, method):
+            address_details = {
+                                'lat': 4.235, 'lng': 1.435436,
+                                'address': "addresse de la tour eiffel"
+            }
+            return Mock(json=address_details)
+        monkeypatch.setattr(classes.geocoder, 'google', mockreturn)
+        assert (
+            classes.GoogleMapsApi('tour eiffel').get_address_geolocation() ==
+            (4.235, 1.435436, "addresse de la tour eiffel")
         )
 
     def test_try_block(self, monkeypatch):
         """Test for unknown location in get_address_geolocation method."""
-        coordinates = classes.GoogleMapsApi('fjklzejflkez')
-        # def mockreturn(request, params):
-        #     json = {"results" : [], "status" : "ZERO_RESULTS"}
-        #     mock = Mock()
-        #     mock.json.return_value = json
-        #     return mock
-        # monkeypatch.setattr(classes, 'get', mockreturn)
+        def mockreturn(request, key, method):
+            json = {"results": [], "status": "ZERO_RESULTS"}
+            return Mock(json=json)
+        monkeypatch.setattr(classes.geocoder, 'google', mockreturn)
         with pytest.raises(classes.UnknownLocation):
-            coordinates.get_address_geolocation()
+            classes.GoogleMapsApi('hdzkjehkd').get_address_geolocation()
 
-            
-    class TestMediaWikiApi():
-        """Test for MediaWikiApi class."""
 
-        def test_request(self, monkeypatch):
-            """Test for request_wiki_page method."""
-            def mockreturn(request, params):
-                json = {
-                        'query': {'geosearch': [{
-                                                'pageid': 12,
-                                                'title': 'Tour Eiffel'
-                                                }]}
-                }
-                mock = Mock()
-                mock.json.return_value = json
-                return mock
-            monkeypatch.setattr(classes, 'get', mockreturn)
-            coordinates_input = classes.MediaWikiApi(classes.maps)
-            assert coordinates_input.request_wiki_page() == (12, 'Tour Eiffel')
+class TestMediaWikiApi():
+    """Test for MediaWikiApi class."""
 
-        def test_summary(self, monkeypatch):
-            """Test for request_wiki_summary method."""
-            def mockreturn(request, params):
-                json = {'query': {'pages': {'1359783': {'extract': 'spam'}}}}
-                mock = Mock()
-                mock.json.return_value = json
-                return mock
-            monkeypatch.setattr(classes, 'get', mockreturn)
-            assert classes.MediaWikiApi.request_wiki_summary(1359783) == 'spam'
+    def test_request(self, monkeypatch):
+        """Test for request_wiki_page method."""
+        def mockreturn(request, params):
+            json = {
+                    'query': {'geosearch': [{
+                                            'pageid': 12,
+                                            'title': 'Tour Eiffel'
+                                            }]}
+            }
+            mock = Mock()
+            mock.json.return_value = json
+            return mock
+        monkeypatch.setattr(classes, 'get', mockreturn)
+        coordinates_input = classes.MediaWikiApi(classes.maps)
+        assert coordinates_input.request_wiki_page() == (12, 'Tour Eiffel')
+
+    def test_summary(self, monkeypatch):
+        """Test for request_wiki_summary method."""
+        def mockreturn(request, params):
+            json = {'query': {'pages': {'1359783': {'extract': 'spam'}}}}
+            mock = Mock()
+            mock.json.return_value = json
+            return mock
+        monkeypatch.setattr(classes, 'get', mockreturn)
+        assert classes.MediaWikiApi.request_wiki_summary(1359783) == 'spam'

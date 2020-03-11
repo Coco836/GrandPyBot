@@ -1,7 +1,10 @@
 #! /usr/bin/env python
 
 from flask import Flask, render_template, url_for, request, jsonify
-from classes import Parser, GrandPyBotConversation, GoogleMapsApi, MediaWikiApi, UnknownLocation
+from classes import (
+                    Parser, GrandPyBotConversation, 
+                    GoogleMapsApi, MediaWikiApi, UnknownLocation
+)
 
 app = Flask(__name__)
 
@@ -13,10 +16,15 @@ def index():
 
 @app.route('/', methods=['POST'])
 def location_request():
+    # Retrieve input from form.
     user_input = request.form['user_input']
+    # Parse the input
     parsed_user_input = Parser.arrange_input(user_input)
 
+    # Instanciation of GoogleMapsApi class and send parsed input
     maps = GoogleMapsApi(parsed_user_input)
+    # If a location exists for the user's input return a story, a map, an url..
+    # If no location exists return a simple message
     try:
         story = MediaWikiApi(maps)
     except UnknownLocation:

@@ -86,7 +86,7 @@ class GoogleMapsApi():
                                                     address_details['lat'],
                                                     address_details['address']
             )
-        except TypeError:
+        except (TypeError, KeyError):
             raise UnknownLocation
 
         return self.latitude, self.longitude, self.address
