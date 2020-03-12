@@ -1,6 +1,6 @@
 import classes
 import pytest
-import GrandPyBot.config as config
+import .config
 import urllib.request
 from unittest.mock import Mock
 

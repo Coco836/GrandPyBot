@@ -7,6 +7,7 @@ from .classes import (
 )
 
 app = Flask(__name__)
+app.config.from_object('config.DevelopmentConfig')
 
 
 @app.route('/')
