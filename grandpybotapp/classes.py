@@ -115,8 +115,8 @@ class GrandPyBotConversation:
     """Retrieve sentences for Papy Bot answers."""
 
     responses = RESPONSES
-    stories_intro = .STORIES_INTRODUCTION
-    end_quotes = .END_STORIES_QUOTE
+    stories_intro = STORIES_INTRODUCTION
+    end_quotes = END_STORIES_QUOTE
 
     @staticmethod
     def random_response():
