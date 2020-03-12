@@ -1,6 +1,4 @@
-# import sys
-# sys.path.append("..")
-import config
+# import .config
 import re
 import random
 import geocoder
