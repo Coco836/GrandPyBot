@@ -1,4 +1,6 @@
-# import .config
+import sys
+sys.path.append("..")
+import GrandPyBot.config as config
 import re
 import random
 import geocoder
