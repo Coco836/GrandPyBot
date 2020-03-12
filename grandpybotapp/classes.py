@@ -1,6 +1,4 @@
-# import sys
-# sys.path.append("..")
-# import GrandPyBot.as import re
+import re
 import random
 import geocoder
 from requests import get
@@ -117,8 +115,8 @@ class GrandPyBotConversation:
     """Retrieve sentences for Papy Bot answers."""
 
     responses = RESPONSES
-    stories_intro = STORIES_INTRODUCTION
-    end_quotes = END_STORIES_QUOTE
+    stories_intro = .STORIES_INTRODUCTION
+    end_quotes = .END_STORIES_QUOTE
 
     @staticmethod
     def random_response():
@@ -152,7 +150,7 @@ class Parser:
     @staticmethod
     def arrange_input(sentence):
         """Method that clear input."""
-        stop_words = FRENCH_STOP_WORDS
+        stop_words = .FRENCH_STOP_WORDS
 
         # Lowercase each words
         lowercase_sentence = sentence.lower()
@@ -180,7 +178,7 @@ class GoogleMapsApi():
         # to find a specific place.
         request_data = geocoder.google(
                                         self.request,
-                                        key=API_KEY_GOOGLE_MAPS,
+                                        key=.API_KEY_GOOGLE_MAPS,
                                         method="places"
         )
         # Retrieving data as .json
