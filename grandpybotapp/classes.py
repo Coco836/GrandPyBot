@@ -150,7 +150,7 @@ class Parser:
     @staticmethod
     def arrange_input(sentence):
         """Method that clear input."""
-        stop_words = .FRENCH_STOP_WORDS
+        stop_words = FRENCH_STOP_WORDS
 
         # Lowercase each words
         lowercase_sentence = sentence.lower()
@@ -178,7 +178,7 @@ class GoogleMapsApi():
         # to find a specific place.
         request_data = geocoder.google(
                                         self.request,
-                                        key=.API_KEY_GOOGLE_MAPS,
+                                        key=API_KEY_GOOGLE_MAPS,
                                         method="places"
         )
         # Retrieving data as .json
