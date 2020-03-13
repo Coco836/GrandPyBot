@@ -3,7 +3,6 @@ import pytest
 import urllib.request
 from unittest.mock import Mock
 
-
 class TestGrandPyBotConversation:
     """Test for GrandPyBotQuestions class."""
 
