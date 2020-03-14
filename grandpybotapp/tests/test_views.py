@@ -22,7 +22,7 @@ def test_base_route():
                 request_wiki_summary=Mock(return_value='toto')))
 )
 def test_location_request():
-    """Test for location_request fonction""".
+    """Test for location_request fonction"""
     client = views.app.test_client()
     url = '/'
     response = client.post(url, data={'user_input': 'Tour Eiffel'})
