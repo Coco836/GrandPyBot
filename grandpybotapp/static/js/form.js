@@ -51,6 +51,9 @@ $(document).ready(function(){
 });
 
 function initMap(data) {
+    if (data === undefined) {
+        return
+    }
     let location = {lat: data['latitude'], lng: data['longitude']};
     let map = new google.maps.Map($("#scroll-dialogue").find(".map").last().get(0), {
         zoom: 10, 
