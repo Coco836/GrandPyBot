@@ -12,8 +12,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    from . import config
-    print(config.RESPONSES)
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
