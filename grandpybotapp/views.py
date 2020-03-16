@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    import config
+    import .config
     print(config.RESPONSES)
     return render_template('index.html')
 
