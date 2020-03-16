@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from flask import Flask, render_template, url_for, request, jsonify
-from classes import (
+from .classes import (
                     Parser, GrandPyBotConversation, 
                     GoogleMapsApi, MediaWikiApi, UnknownLocation
 )
@@ -12,7 +12,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-        return render_template('index.html')
+    import config
+    print(config.RESPONSES)
+    return render_template('index.html')
 
 
 @app.route('/', methods=['POST'])
