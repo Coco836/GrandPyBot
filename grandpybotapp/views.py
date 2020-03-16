@@ -12,10 +12,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    import .config
+    from . import config
     print(config.RESPONSES)
     return render_template('index.html')
-
 
 @app.route('/', methods=['POST'])
 def location_request():
