@@ -3,7 +3,7 @@ import re
 import random
 import geocoder
 from requests import get
-from . import config as config
+import config
 
 
 class GrandPyBotConversation:
